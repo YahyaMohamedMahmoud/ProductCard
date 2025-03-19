@@ -1,21 +1,21 @@
 import { IProduct } from "../interfaces";
 import { textSlice } from "../Utils/textSlice";
-import Button from "./Buttons";
+import Button from "./Ui/Buttons";
 import Image from "./Image";
 
 interface IProps {
   product: IProduct;
 }
 const ProductCard = ({ product }: IProps) => {
-  const { imgUrl, title, description, colors, price, categry } = product;
+  const { imgUrl, title, description, colors, price, categry} = product;
   return (
     <>
       <div className="border border-gray-200 rounded-md p-2">
         {/* image */}
 
         <Image
-          src={imgUrl}
           className="rounded-md w-full h-52 md:object-center"
+          src={imgUrl}
           alt={title}
         />
 
@@ -46,8 +46,7 @@ const ProductCard = ({ product }: IProps) => {
           </div>
         </div>
 
-        {/* button */}
-
+        {/* buttons */}
         <div className="flex space-x-2 mt-4">
           <Button>Edit</Button>
           <Button intent={"secondary"}>Delete</Button>
