@@ -1,12 +1,10 @@
+
 import Button from "./Ui/Buttons";
-import Modal from "./Ui/Modal";
 
 interface IProps {
-    isOpen: boolean;
-    open: () => void;
-    close: () => void;
+  open: () => void;
 }
-const Header = ({close , open , isOpen}: IProps) => {
+const Header = ({ open }: IProps) => {
   return (
     <>
       <div className="flex justify-between items-center my-5">
@@ -17,23 +15,7 @@ const Header = ({close , open , isOpen}: IProps) => {
           Build Now
         </Button>
       </div>
-      <Modal isOpen={isOpen} close={close} title="Add New Product">
-
-        <div className="mt-4 flex space-x-2">
-          <Button
-            intent="primary"
-            onClick={close}
-          >
-            Submit
-          </Button>
-          <Button
-            intent="close"
-            onClick={close}
-          >
-            Close
-          </Button>
-        </div>
-      </Modal>
+      
     </>
   );
 };
