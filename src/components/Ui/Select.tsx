@@ -3,6 +3,7 @@ import { ChevronUpDownIcon } from '@heroicons/react/16/solid'
 import { CheckIcon } from '@heroicons/react/20/solid'
 import { categories } from '../../data'
 import { ICategory } from '../../interfaces'
+import Image from '../Image'
 
 interface IProp {
     selected: ICategory;
@@ -38,7 +39,9 @@ const Select = ({selected , setSelected}:IProp)=> {
               className="group relative cursor-default py-2 pr-9 pl-3 text-gray-900 select-none data-focus:bg-indigo-600 data-focus:text-white data-focus:outline-hidden"
             >
               <div className="flex items-center">
-                <img alt={category.name} src={category.imgurl} className="size-5 shrink-0 rounded-full" />
+                
+                 <Image alt={category.name} src={category.imgurl} className="size-5 shrink-0 rounded-full" />
+                
                 <span className="ml-3 block truncate font-normal group-data-selected:font-semibold">{category.name}</span>
               </div>
 

@@ -33,7 +33,8 @@ function App() {
   const [isOpenForEdit, setIsOpenForEdit] = useState(false);
   const [tempColor, setTempColor] = useState<string[]>([]);
   const [selected, setSelected] = useState(categories[0]);
-  const [selectedProduct, setSelectedProduct] = useState<IProduct>(defaultProduct);
+  const [selectedProduct, setSelectedProduct] =
+    useState<IProduct>(defaultProduct);
   const [productIndex, setProductIndex] = useState<number>(0);
   const [isOpenForDelete, setIsOpenForDelete] = useState(false);
 
@@ -97,15 +98,19 @@ function App() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const { title, description, imgUrl, price } = product;
     const errors = productValidation({
-      title: product.title,
-      description: product.description,
-      imgUrl: product.imgUrl,
-      price: product.price,
+      title,
+      description,
+      imgUrl,
+      price,
     });
+
     const isVaild =
       Object.values(errors).some((value) => value === "") &&
       Object.values(errors).every((value) => value === "");
+
     if (!isVaild) {
       setErrors(errors);
       return;
