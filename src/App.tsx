@@ -10,6 +10,7 @@ import { productValidation } from "./Validation";
 import ErrorMessage from "./components/Ui/ErrorMessage";
 import CircleColor from "./components/Ui/CircleColor";
 import Select from "./components/Ui/Select";
+import toast, { Toaster } from 'react-hot-toast';
 
 function App() {
   const defaultProduct = {
@@ -25,7 +26,6 @@ function App() {
   };
 
   const productError = { title: "", description: "", imgUrl: "", price: "" };
-
   const [products, setProducts] = useState<IProduct[]>(ProductData);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
   const [errors, setErrors] = useState(productError);
@@ -127,6 +127,7 @@ function App() {
     setProduct(defaultProduct);
     setTempColor([]);
     close();
+    toast.success('Product added successfully');
   };
   const handleSubmitToEdit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -149,10 +150,14 @@ function App() {
       ...selectedProduct,
       colors: tempColor.concat(selectedProduct.colors),
     };
+    if(!updatedProducts){
+      return;
+    }
     setProducts(updatedProducts);
     setSelectedProduct(defaultProduct);
     setTempColor([]);
     closeEdit();
+    toast.success('Product Updated successfully');
   };
 
   const onCancle = () => {
@@ -167,6 +172,7 @@ function App() {
     );
     setProducts(filtered);
     closeDelete();
+    toast.success('Product Deleted successfully');
   };
 
   return (
@@ -304,6 +310,17 @@ function App() {
             </Button>
           </div>
         </Modal>
+
+
+        {/* Toast */}
+        <Toaster toastOptions={
+        {
+          duration: 4000,
+          style: {
+            fontWeight: 500
+          }
+        }
+        } />
       </main>
     </>
   );
