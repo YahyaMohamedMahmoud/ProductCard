@@ -29,3 +29,18 @@ export function productValidation(product:{title:string , description:string , p
 
     return errors
 }
+
+
+export function productColor (product:{colors:string[]}) {
+    const string = "Please select at least one color" 
+const Colorerrors:{
+    colors:string[]
+} = {
+    colors: []
+}
+if(product.colors.length === 0) {
+    Colorerrors.colors = [string]
+}
+
+return Colorerrors
+}

@@ -6,7 +6,7 @@ import Modal from "./components/Ui/Modal";
 import Input from "./components/Ui/Input";
 import Button from "./components/Ui/Buttons";
 import { IProduct } from "./interfaces";
-import { productValidation } from "./Validation";
+import { productColor, productValidation } from "./Validation";
 import ErrorMessage from "./components/Ui/ErrorMessage";
 import CircleColor from "./components/Ui/CircleColor";
 import Select from "./components/Ui/Select";
@@ -26,6 +26,7 @@ function App() {
   };
 
   const productError = { title: "", description: "", imgUrl: "", price: "" };
+  const colorproductError = { colors: [""] };
   const [products, setProducts] = useState<IProduct[]>(ProductData);
   const [product, setProduct] = useState<IProduct>(defaultProduct);
   const [errors, setErrors] = useState(productError);
@@ -37,6 +38,7 @@ function App() {
     useState<IProduct>(defaultProduct);
   const [productIndex, setProductIndex] = useState<number>(0);
   const [isOpenForDelete, setIsOpenForDelete] = useState(false);
+  const [colorError, setColorError] = useState(colorproductError);
 
   const open = () => {
     setIsOpen(true);
@@ -74,7 +76,11 @@ function App() {
           );
           return;
         }
+
         setTempColor((prevColor) => [...prevColor, color]);
+        setColorError({
+          colors: ['']
+        })
       }}
     />
   ));
@@ -106,10 +112,18 @@ function App() {
       imgUrl,
       price,
     });
-
+    const colorErrors = productColor({
+      colors: product.colors,
+    })
+   
     const isVaild =
       Object.values(errors).some((value) => value === "") &&
       Object.values(errors).every((value) => value === "");
+
+      if(tempColor.length === 0){
+        setColorError(colorErrors);
+      }
+
 
     if (!isVaild) {
       setErrors(errors);
@@ -225,6 +239,11 @@ function App() {
                   {color}
                 </span>
               ))}
+                {
+                  colorError.colors.map((error) => (
+                    <ErrorMessage message={error} key={error}/>
+                  ))
+                }
             </div>
             <div className="mt-4 flex space-x-2">
               <Button intent="primary" type="submit">
